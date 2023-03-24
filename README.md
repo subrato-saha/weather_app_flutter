@@ -4,7 +4,7 @@ A new Flutter project. With OpenWeather API
 
 ## Getting Started
 
-![Loading App Screenshot...](https://i.ibb.co/7GVZK3q/Screenshot-1679671965.png| height=100)
+![Loading App Screenshot...](https://i.ibb.co/7GVZK3q/Screenshot-1679671965.png | height=100)
 
 This project is a starting point for a Flutter application.
 
