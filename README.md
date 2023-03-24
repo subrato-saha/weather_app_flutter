@@ -1,8 +1,10 @@
 # weather_app_flutter
 
-A new Flutter project.
+A new Flutter project. With OpenWeather API
 
 ## Getting Started
+
+![Loading App Screenshot...](https://i.ibb.co/7GVZK3q/Screenshot-1679671965.png)
 
 This project is a starting point for a Flutter application.
 
