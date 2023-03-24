@@ -98,9 +98,82 @@ class _MyHomePageState extends State<MyHomePage> {
       });
   }
 
+  TextEditingController _searchController = TextEditingController();
+
+  _searchDataFromApi() async {
+    var weatherResponse = await http.post(Uri.parse(
+        "https://api.openweathermap.org/data/2.5/weather?q=${_searchController.text}&appid=4b142be1f90d130cf2f06586f711464a&units=metric"));
+    var forecastResponse = await http.post(Uri.parse(
+        "https://api.openweathermap.org/data/2.5/forecast?q=${_searchController.text}&appid=4b142be1f90d130cf2f06586f711464a&units=metric"));
+
+    var weather = jsonDecode(weatherResponse.body);
+    var forecast = jsonDecode(forecastResponse.body);
+
+    setState(() {
+      weatherMap = Map<String, dynamic>.from(weather);
+      forecastMap = Map<String, dynamic>.from(forecast);
+    });
+    _searchController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  insetPadding: EdgeInsets.all(0),
+                  backgroundColor: Colors.white.withOpacity(0.95),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        controller: _searchController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        )),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(40.0)),
+                              primary: Color.fromARGB(255, 210, 172, 162)),
+                          onPressed: () {
+                            if (_searchController.text != "") {
+                              _searchDataFromApi();
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          child: Text(
+                            'Search',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              });
+        },
+        backgroundColor: Color.fromARGB(255, 210, 172, 162),
+        child: Icon(Icons.search),
+      ),
       body: weatherMap == null
           ? Center(
               child: CircularProgressIndicator(),
