@@ -4,8 +4,7 @@ A new Flutter project. With OpenWeather API
 
 ## Getting Started
 
-![Loading App Screenshot...](https://i.ibb.co/7GVZK3q/Screenshot-1679671965.png | width=100)
-<img src="[https://your-image-url.type](https://i.ibb.co/7GVZK3q/Screenshot-1679671965.png)" width="100" height="100">
+<img src="https://i.ibb.co/7GVZK3q/Screenshot-1679671965.png" height="500">
 
 This project is a starting point for a Flutter application.
 
